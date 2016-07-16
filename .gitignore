@@ -8,6 +8,7 @@
 # Visual Studio Code, Unity plugin
 /Assets/VSCode/
 .vscode
+VSCode.meta
 
 # Sublime Text projects and workspaces
 *.sublime*
