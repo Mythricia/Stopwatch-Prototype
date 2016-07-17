@@ -135,7 +135,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   sprintSpeed: 12
-  gravity: 9.81
+  gravity: 19.62
+  canJump: 0
   defaultRecoveryPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &11444904
 MonoBehaviour:
