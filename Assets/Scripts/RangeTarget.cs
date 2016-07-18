@@ -3,15 +3,16 @@
 [SelectionBase]
 public class RangeTarget : MonoBehaviour
 {
-    private GameObject controller;
-    public TargetHint[] myHints;
+    private RangeController myController;
+    private TargetHint[] myHints;
     [Space(10)]
     public GameObject hitPrefab;
     // Add explosion prefab
 
     public void enableTarget(bool active)
     {
-        gameObject.SetActive(active);
+        GetComponent<Renderer>().enabled = active;
+        GetComponent<Collider>().enabled = active;
 
         if (myHints != null)
         {
@@ -23,16 +24,32 @@ public class RangeTarget : MonoBehaviour
     }
 
 
-    public void Setup(bool active, GameObject newController)
+    public void Setup(bool active, RangeController newController)
     {
-        gameObject.SetActive(active);
-        controller = newController;
+        GetComponent<Renderer>().enabled = active;
+        GetComponent<Collider>().enabled = active;
+
+        myController = newController;
+        myHints = transform.parent.GetComponentsInChildren<TargetHint>();
+    }
+
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (hitPrefab != null)
+            Instantiate(hitPrefab, transform.position, transform.rotation);
+
+        // only do stuff if hit by a projectile
+        if (other.gameObject.tag == "Projectile")
+        {
+            Die();
+        }
     }
 
 
     private void Die()
     {
-        if (!controller)
+        if (!myController)
             return;
 
         if (myHints != null)
@@ -43,19 +60,6 @@ public class RangeTarget : MonoBehaviour
             }
         }
 
-        controller.GetComponent<RangeController>().TargetDied(gameObject);
-    }
-
-
-    void OnCollisionEnter(Collision newCollision)
-    {
-        if (hitPrefab != null)
-            Instantiate(hitPrefab, transform.position, transform.rotation);
-
-        // only do stuff if hit by a projectile
-        if (newCollision.gameObject.tag == "Projectile")
-        {
-            Die();
-        }
+        myController.TargetDied(this);
     }
 }
