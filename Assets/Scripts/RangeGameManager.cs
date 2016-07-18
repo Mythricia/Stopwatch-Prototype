@@ -4,7 +4,22 @@ using UnityEngine.UI;
 
 public class RangeGameManager : MonoBehaviour
 {
-    public static RangeGameManager rgm;
+    // Using a Property, as to ensure a singleton instance of RangeGameManager
+    private static RangeGameManager rgm;
+
+    public static RangeGameManager Rgm
+    {
+        get
+        {
+            if (rgm == null)
+            {
+                rgm = new RangeGameManager();
+            }
+            return rgm;
+        }
+    }
+
+
 
     public GameObject player;
 
@@ -42,7 +57,7 @@ public class RangeGameManager : MonoBehaviour
 
         if (rgm == null)
         {
-            rgm = this.gameObject.GetComponent<RangeGameManager>();
+            rgm = this;
         }
 
         timeLeftDisplay.text = timeLeft.ToString("0.00");

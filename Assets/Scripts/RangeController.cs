@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 public class RangeController : MonoBehaviour
 {
-    public List<GameObject> rangeTargets;
+    public List<RangeTarget> rangeTargets;
     public bool startActive = false;
 
-    public GameObject rangeButton;
+    public ConsoleButton consoleButton;
 
     private bool hasInitialized = false;
 
@@ -16,12 +16,8 @@ public class RangeController : MonoBehaviour
     {
         if (!hasInitialized)
         {
-            InitializeTargets();
-            InitializeButton();
+            Initialize();
         }
-
-        // if(!RangeGameManager.rgm)
-        // throw new Exception("No RangeGameManager in the scene!!");
     }
 
 
@@ -29,10 +25,10 @@ public class RangeController : MonoBehaviour
     {
         if (rangeTargets.Count == 0)
         {
-            RangeGameManager.rgm.RangeCompleted();
-            RangeGameManager.rgm.StopTimer();
+            RangeGameManager.Rgm.RangeCompleted();
+            RangeGameManager.Rgm.StopTimer();
             Debug.Log("Range #" + GetInstanceID() + " has shut down.");
-            rangeButton.GetComponent<ConsoleButton>().Sleep();
+            consoleButton.Sleep();
             gameObject.SetActive(false);
         }
     }
@@ -43,25 +39,20 @@ public class RangeController : MonoBehaviour
     {
         for (int i = 0; i < rangeTargets.Count; i++)
         {
-            rangeTargets[i].GetComponent<RangeTarget>().enableTarget(true);
+            rangeTargets[i].enableTarget(true);
         }
 
-        RangeGameManager.rgm.StartTimer();
+        RangeGameManager.Rgm.StartTimer();
     }
 
 
-
-
-    void InitializeButton()
-    {
-        if (rangeButton)
-            rangeButton.GetComponent<ConsoleButton>().Setup(gameObject);
-    }
-
-
-    void InitializeTargets()
+    void Initialize()
     {
         hasInitialized = true;
+
+
+        if (consoleButton)
+            consoleButton.Setup(gameObject);
 
         if (rangeTargets.Count == 0)
         {
@@ -71,14 +62,14 @@ public class RangeController : MonoBehaviour
 
         for (int i = 0; i < rangeTargets.Count; i++)
         {
-            rangeTargets[i].GetComponent<RangeTarget>().Setup(startActive, gameObject);
+            rangeTargets[i].Setup(startActive, this);
         }
     }
 
 
-    public void TargetDied(GameObject target)
+    public void TargetDied(RangeTarget target)
     {
         rangeTargets.Remove(target);
-        Destroy(target);
+        target.gameObject.SetActive(false);
     }
 }

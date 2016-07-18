@@ -3,7 +3,7 @@
 [SelectionBase]
 public class RangeTarget : MonoBehaviour
 {
-    private GameObject controller;
+    private RangeController myController;
     public TargetHint[] myHints;
     [Space(10)]
     public GameObject hitPrefab;
@@ -23,16 +23,29 @@ public class RangeTarget : MonoBehaviour
     }
 
 
-    public void Setup(bool active, GameObject newController)
+    public void Setup(bool active, RangeController newController)
     {
         gameObject.SetActive(active);
-        controller = newController;
+        myController = newController;
+    }
+
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (hitPrefab != null)
+            Instantiate(hitPrefab, transform.position, transform.rotation);
+
+        // only do stuff if hit by a projectile
+        if (other.gameObject.tag == "Projectile")
+        {
+            Die();
+        }
     }
 
 
     private void Die()
     {
-        if (!controller)
+        if (!myController)
             return;
 
         if (myHints != null)
@@ -43,19 +56,6 @@ public class RangeTarget : MonoBehaviour
             }
         }
 
-        controller.GetComponent<RangeController>().TargetDied(gameObject);
-    }
-
-
-    void OnCollisionEnter(Collision newCollision)
-    {
-        if (hitPrefab != null)
-            Instantiate(hitPrefab, transform.position, transform.rotation);
-
-        // only do stuff if hit by a projectile
-        if (newCollision.gameObject.tag == "Projectile")
-        {
-            Die();
-        }
+        myController.TargetDied(this);
     }
 }
