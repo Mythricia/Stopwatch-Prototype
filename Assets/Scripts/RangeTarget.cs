@@ -4,14 +4,15 @@
 public class RangeTarget : MonoBehaviour
 {
     private RangeController myController;
-    public TargetHint[] myHints;
+    private TargetHint[] myHints;
     [Space(10)]
     public GameObject hitPrefab;
     // Add explosion prefab
 
     public void enableTarget(bool active)
     {
-        gameObject.SetActive(active);
+        GetComponent<Renderer>().enabled = active;
+        GetComponent<Collider>().enabled = active;
 
         if (myHints != null)
         {
@@ -25,8 +26,11 @@ public class RangeTarget : MonoBehaviour
 
     public void Setup(bool active, RangeController newController)
     {
-        gameObject.SetActive(active);
+        GetComponent<Renderer>().enabled = active;
+        GetComponent<Collider>().enabled = active;
+
         myController = newController;
+        myHints = transform.parent.GetComponentsInChildren<TargetHint>();
     }
 
 

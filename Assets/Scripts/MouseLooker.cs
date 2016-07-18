@@ -54,25 +54,25 @@ public class MouseLooker : MonoBehaviour
         }
 
         // if the player fires, then relock the cursor, unless a menu is open
-        if (Input.GetButtonDown("Fire1") && !(RangeGameManager.Rgm.gameIsOver || RangeGameManager.Rgm.levelMenuIsShowing || RangeGameManager.Rgm.debugUiIsShowing))
+        if (Input.GetButtonDown("Fire1") && !(RangeGameManager.rgm.gameIsOver || RangeGameManager.rgm.levelMenuIsShowing || RangeGameManager.rgm.debugUiIsShowing))
         {
             LockCursor(true);
         }
 
         if (Input.GetButtonDown("LevelSelect"))
         {
-            if (RangeGameManager.Rgm.levelMenuIsShowing)
-                RangeGameManager.Rgm.hideLevelMenu();
-            else if (RangeGameManager.Rgm.levelMenuIsShowing == false)
-                RangeGameManager.Rgm.showLevelMenu();
+            if (RangeGameManager.rgm.levelMenuIsShowing)
+                RangeGameManager.rgm.hideLevelMenu();
+            else if (RangeGameManager.rgm.levelMenuIsShowing == false)
+                RangeGameManager.rgm.showLevelMenu();
         }
 
         if (Input.GetButtonDown("DebugMenu"))
         {
-            if (RangeGameManager.Rgm.debugUiIsShowing)
-                RangeGameManager.Rgm.hideDebugMenu();
-            else if (RangeGameManager.Rgm.debugUiIsShowing == false)
-                RangeGameManager.Rgm.showDebugMenu();
+            if (RangeGameManager.rgm.debugUiIsShowing)
+                RangeGameManager.rgm.hideDebugMenu();
+            else if (RangeGameManager.rgm.debugUiIsShowing == false)
+                RangeGameManager.rgm.showDebugMenu();
         }
     }
 

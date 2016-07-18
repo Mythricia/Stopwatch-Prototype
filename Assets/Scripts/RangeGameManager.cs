@@ -5,20 +5,7 @@ using UnityEngine.UI;
 public class RangeGameManager : MonoBehaviour
 {
     // Using a Property, as to ensure a singleton instance of RangeGameManager
-    private static RangeGameManager rgm;
-
-    public static RangeGameManager Rgm
-    {
-        get
-        {
-            if (rgm == null)
-            {
-                rgm = new RangeGameManager();
-            }
-            return rgm;
-        }
-    }
-
+    public static RangeGameManager rgm {get; private set;}
 
 
     public GameObject player;
@@ -51,14 +38,16 @@ public class RangeGameManager : MonoBehaviour
     private int rangesCompleted = 0;
 
 
+    // Assign this RangeGameManager as the singleton instance.
+    void Awake()
+    {
+        rgm = this;
+    }
+
+
     void Start()
     {
         timeLeft = timeToComplete;
-
-        if (rgm == null)
-        {
-            rgm = this;
-        }
 
         timeLeftDisplay.text = timeLeft.ToString("0.00");
 

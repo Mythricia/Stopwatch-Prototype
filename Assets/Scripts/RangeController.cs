@@ -4,12 +4,13 @@ using System.Collections.Generic;
 
 public class RangeController : MonoBehaviour
 {
-    public List<RangeTarget> rangeTargets;
     public bool startActive = false;
 
-    public ConsoleButton consoleButton;
+    private List<RangeTarget> rangeTargets = new List<RangeTarget>();
+    private ConsoleButton[] consoleButtons;
 
     private bool hasInitialized = false;
+    private bool isActive = false;
 
 
     void Start()
@@ -23,13 +24,18 @@ public class RangeController : MonoBehaviour
 
     void Update()
     {
-        if (rangeTargets.Count == 0)
+        if (isActive && rangeTargets.Count == 0)
         {
-            RangeGameManager.Rgm.RangeCompleted();
-            RangeGameManager.Rgm.StopTimer();
+            RangeGameManager.rgm.RangeCompleted();
+            RangeGameManager.rgm.StopTimer();
             Debug.Log("Range #" + GetInstanceID() + " has shut down.");
-            consoleButton.Sleep();
-            gameObject.SetActive(false);
+
+            foreach (var button in consoleButtons)
+            {
+                button.Sleep();
+            }
+
+            isActive = false;
         }
     }
 
@@ -42,7 +48,17 @@ public class RangeController : MonoBehaviour
             rangeTargets[i].enableTarget(true);
         }
 
-        RangeGameManager.Rgm.StartTimer();
+        foreach (var button in consoleButtons)
+        {
+            // FIXME: This is an ugly back-and-forth.. Button tells us it was pushed, and then we call it back saying hey, you were pushed.
+            //        Not a huge deal, but it's really clunky and can easily be done better
+            
+            button.ButtonPressed();
+        }
+
+        isActive = true;
+
+        RangeGameManager.rgm.StartTimer();
     }
 
 
@@ -50,13 +66,20 @@ public class RangeController : MonoBehaviour
     {
         hasInitialized = true;
 
+        rangeTargets.AddRange(GetComponentsInChildren<RangeTarget>());
 
-        if (consoleButton)
-            consoleButton.Setup(gameObject);
+        consoleButtons = GetComponentsInChildren<ConsoleButton>();
 
         if (rangeTargets.Count == 0)
-        {
             return;
+
+
+        if (consoleButtons.Length != 0)
+        {
+            foreach (var button in consoleButtons)
+            {
+                button.Setup(this);
+            }
         }
 
 
@@ -70,6 +93,8 @@ public class RangeController : MonoBehaviour
     public void TargetDied(RangeTarget target)
     {
         rangeTargets.Remove(target);
-        target.gameObject.SetActive(false);
+
+        target.gameObject.GetComponent<Renderer>().enabled = false;
+        target.gameObject.GetComponent<Collider>().enabled = false;
     }
 }

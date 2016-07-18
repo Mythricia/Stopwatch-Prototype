@@ -121,9 +121,9 @@ public class ConsoleButton : MonoBehaviour
     }
 
 
-    public void Setup(GameObject controller)
+    public void Setup(RangeController controller)
     {
-        myRangeController = controller.GetComponent<RangeController>();
+        myRangeController = controller;
     }
 
 
@@ -133,12 +133,11 @@ public class ConsoleButton : MonoBehaviour
         {
             Debug.Log("I was interacted with by " + actor);
             myRangeController.ButtonPressed();
-            ButtonPressed();
         }
     }
 
 
-    private void ButtonPressed()
+    public void ButtonPressed()
     {
         interactable = false;
         rend.material.color = Color.blue;
