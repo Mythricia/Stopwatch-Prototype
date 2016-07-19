@@ -33,7 +33,7 @@ public class RangeGameManager : MonoBehaviour
     public GameObject debugUI;
     public bool debugUiIsShowing = false;
 
-    public List<RangeController> ranges;
+    public List<BasicRangeController> ranges;
 
     private int rangesCompleted = 0;
 

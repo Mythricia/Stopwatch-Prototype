@@ -43,9 +43,9 @@ public class RangeController : MonoBehaviour
 
     public void ButtonPressed()
     {
-        for (int i = 0; i < rangeTargets.Count; i++)
+        foreach (var target in rangeTargets)
         {
-            rangeTargets[i].enableTarget(true);
+            target.enableTarget(true);
         }
 
         foreach (var button in consoleButtons)
@@ -83,10 +83,11 @@ public class RangeController : MonoBehaviour
         }
 
 
-        for (int i = 0; i < rangeTargets.Count; i++)
+        foreach (var target in rangeTargets)
         {
-            rangeTargets[i].Setup(startActive, this);
+            target.Setup(startActive, this);
         }
+
     }
 
 
