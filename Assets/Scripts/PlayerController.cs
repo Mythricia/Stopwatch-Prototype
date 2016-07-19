@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5.0f;
     public float sprintSpeed = 9.0f;
     public float gravity = 9.81f;
+    public bool canJump = false;
+    public float jumpPower = 6f;
+    public bool smoothMovement = true;
 
     Vector3 recoveryPosition;
 
@@ -28,49 +31,43 @@ public class PlayerController : MonoBehaviour
         if (myController.enabled != true)
             return;
 
+
         if (Input.GetButtonDown("Retry"))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
+
         if (Input.GetButtonDown("Recover"))
             transform.position = recoveryPosition;
 
 
-        if (Input.GetButton("Sprint")) // Sprint if Left Shift is held down
-        {
-            // Determine how much should move in the z-direction
-            Vector3 movementZ = Input.GetAxis("Vertical") * Vector3.forward * sprintSpeed * Time.deltaTime;
+        doMovement();
+    }
 
-            // Determine how much should move in the x-direction
-            Vector3 movementX = Input.GetAxis("Horizontal") * Vector3.right * sprintSpeed * Time.deltaTime;
 
-            // Convert combined Vector3 from local space to world space based on the position of the current gameobject (player)
-            Vector3 movement = transform.TransformDirection(movementZ + movementX);
+    void doMovement()
+    {
+        Vector3 movement = new Vector3(0, 0, 0);
 
-            // Apply gravity (so the object will fall if not grounded)
-            movement.y -= gravity * Time.deltaTime;
 
-            // Actually move the character controller in the movement direction
-            myController.Move(movement);
-        }
-        else
-        {
-            // Determine how much should move in the z-direction
-            Vector3 movementZ = Input.GetAxis("Vertical") * Vector3.forward * moveSpeed * Time.deltaTime;
+        // Ternary operator ? porn : ahead
 
-            // Determine how much should move in the x-direction
-            Vector3 movementX = Input.GetAxis("Horizontal") * Vector3.right * moveSpeed * Time.deltaTime;
+        movement.x = smoothMovement ? Input.GetAxis("Horizontal") : Input.GetAxisRaw("Horizontal");
+        movement.z = smoothMovement ? Input.GetAxis("Vertical") : Input.GetAxisRaw("Vertical");
 
-            // Convert combined Vector3 from local space to world space based on the position of the current gameobject (player)
-            Vector3 movement = transform.TransformDirection(movementZ + movementX);
+        movement = transform.TransformDirection(Vector3.ClampMagnitude(movement, 1));
 
-            // Apply gravity (so the object will fall if not grounded)
-            movement.y -= gravity * Time.deltaTime;
+        movement *= (Input.GetButton("Sprint") ? sprintSpeed : moveSpeed);
 
-            // Actually move the character controller in the movement direction
-            myController.Move(movement);
-        }
+
+        Vector3 curVelocity = myController.velocity;
+        movement.y = curVelocity.y - (gravity * Time.deltaTime);
+
+        if (canJump && Input.GetKeyDown("space") && myController.isGrounded)
+            movement.y = jumpPower;
+
+        myController.Move(movement * Time.deltaTime);
     }
 
 

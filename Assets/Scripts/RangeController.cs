@@ -4,36 +4,38 @@ using System.Collections.Generic;
 
 public class RangeController : MonoBehaviour
 {
-    public List<GameObject> rangeTargets;
     public bool startActive = false;
 
-    public GameObject rangeButton;
+    private List<RangeTarget> rangeTargets = new List<RangeTarget>();
+    private ConsoleButton[] consoleButtons;
 
     private bool hasInitialized = false;
+    private bool isActive = false;
 
 
     void Start()
     {
         if (!hasInitialized)
         {
-            InitializeTargets();
-            InitializeButton();
+            Initialize();
         }
-
-        // if(!RangeGameManager.rgm)
-        // throw new Exception("No RangeGameManager in the scene!!");
     }
 
 
     void Update()
     {
-        if (rangeTargets.Count == 0)
+        if (isActive && rangeTargets.Count == 0)
         {
             RangeGameManager.rgm.RangeCompleted();
             RangeGameManager.rgm.StopTimer();
             Debug.Log("Range #" + GetInstanceID() + " has shut down.");
-            rangeButton.GetComponent<ConsoleButton>().Sleep();
-            gameObject.SetActive(false);
+
+            foreach (var button in consoleButtons)
+            {
+                button.Sleep();
+            }
+
+            isActive = false;
         }
     }
 
@@ -41,44 +43,59 @@ public class RangeController : MonoBehaviour
 
     public void ButtonPressed()
     {
-        for (int i = 0; i < rangeTargets.Count; i++)
+        foreach (var target in rangeTargets)
         {
-            rangeTargets[i].GetComponent<RangeTarget>().enableTarget(true);
+            target.enableTarget(true);
         }
+
+        foreach (var button in consoleButtons)
+        {
+            // FIXME: This is an ugly back-and-forth.. Button tells us it was pushed, and then we call it back saying hey, you were pushed.
+            //        Not a huge deal, but it's really clunky and can easily be done better
+            
+            button.ButtonPressed();
+        }
+
+        isActive = true;
 
         RangeGameManager.rgm.StartTimer();
     }
 
 
-
-
-    void InitializeButton()
-    {
-        if (rangeButton)
-            rangeButton.GetComponent<ConsoleButton>().Setup(gameObject);
-    }
-
-
-    void InitializeTargets()
+    void Initialize()
     {
         hasInitialized = true;
 
+        rangeTargets.AddRange(GetComponentsInChildren<RangeTarget>());
+
+        consoleButtons = GetComponentsInChildren<ConsoleButton>();
+
         if (rangeTargets.Count == 0)
-        {
             return;
-        }
 
 
-        for (int i = 0; i < rangeTargets.Count; i++)
+        if (consoleButtons.Length != 0)
         {
-            rangeTargets[i].GetComponent<RangeTarget>().Setup(startActive, gameObject);
+            foreach (var button in consoleButtons)
+            {
+                button.Setup(this);
+            }
         }
+
+
+        foreach (var target in rangeTargets)
+        {
+            target.Setup(startActive, this);
+        }
+
     }
 
 
-    public void TargetDied(GameObject target)
+    public void TargetDied(RangeTarget target)
     {
         rangeTargets.Remove(target);
-        Destroy(target);
+
+        target.gameObject.GetComponent<Renderer>().enabled = false;
+        target.gameObject.GetComponent<Collider>().enabled = false;
     }
 }

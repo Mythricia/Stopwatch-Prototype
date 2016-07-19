@@ -1,26 +1,19 @@
 using UnityEngine;
-using System.Collections.Generic;
 
-
-[ExecuteInEditMode]
 public class RangeControllerEditorLines : MonoBehaviour
 {
-    private List<GameObject> rangeTargets;
-
-
-    void Start()
+    void OnDrawGizmos()
     {
-        rangeTargets = gameObject.GetComponent<RangeController>().rangeTargets;
-    }
+        BasicRangeTarget[] rangeTargets = GetComponentsInChildren<BasicRangeTarget>();
 
 
-    void Update()
-    {
-        if (rangeTargets.Count != 0)
+        if (rangeTargets != null)
         {
-            foreach (var tar in rangeTargets)
+            Gizmos.color = Color.red;
+
+            foreach (var target in rangeTargets)
             {
-                Debug.DrawLine(gameObject.transform.position, tar.gameObject.transform.position, Color.red);
+                Gizmos.DrawLine(gameObject.transform.position, target.transform.position);
             }
         }
     }
