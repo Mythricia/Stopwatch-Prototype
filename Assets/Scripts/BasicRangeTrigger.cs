@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public class BaseRangeTrigger : MonoBehaviour
+public class BasicRangeTrigger : MonoBehaviour
 {
 
 
