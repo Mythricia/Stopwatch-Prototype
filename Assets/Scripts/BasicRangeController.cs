@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class BasicRangeController : MonoBehaviour
 {
     private List<BasicRangeTarget> myTargets = new List<BasicRangeTarget>();
-    private List<BasicRangeTrigger> myTriggers;
+    private List<BasicRangeTrigger> myTriggers = new List<BasicRangeTrigger>();
 
     private bool hasInitialized = false;
     private bool isActive = false;
@@ -40,11 +40,11 @@ public class BasicRangeController : MonoBehaviour
     }
 
 
-    void Enable()
+    public void Enable()
     {
         foreach (var tar in myTargets)
         {
-            tar.enableTarget(true);
+            tar.Enable();
         }
 
         foreach (var trig in myTriggers)
@@ -52,8 +52,8 @@ public class BasicRangeController : MonoBehaviour
             trig.ButtonPressed();
         }
 
-        isActive = true;
 
+        isActive = true;
 
         RangeGameManager.rgm.StartTimer();
     }
@@ -75,7 +75,7 @@ public class BasicRangeController : MonoBehaviour
     }
 
 
-    void TargetHit(BasicRangeTarget target)
+    public void TargetHit(BasicRangeTarget target)
     {
         target.Disable();
 

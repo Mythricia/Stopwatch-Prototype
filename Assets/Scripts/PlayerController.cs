@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float sprintSpeed = 9.0f;
     public float gravity = 9.81f;
     public bool canJump = false;
+    public float jumpPower = 6f;
     public bool smoothMovement = true;
 
     Vector3 recoveryPosition;
@@ -64,7 +65,7 @@ public class PlayerController : MonoBehaviour
         movement.y = curVelocity.y - (gravity * Time.deltaTime);
 
         if (canJump && Input.GetKeyDown("space") && myController.isGrounded)
-            movement.y = 4f;
+            movement.y = jumpPower;
 
         myController.Move(movement * Time.deltaTime);
     }

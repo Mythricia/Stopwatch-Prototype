@@ -83,9 +83,9 @@ public class ShootingController : MonoBehaviour
         {
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, interactRange, layerMask))
             {
-                if (hit.collider.gameObject.GetComponent<ConsoleButton>() != null)
+                if (hit.collider.gameObject.GetComponent<BasicRangeTrigger>() != null)
                 {
-                    hit.collider.gameObject.GetComponent<ConsoleButton>().Interact(gameObject);
+                    hit.collider.gameObject.GetComponent<BasicRangeTrigger>().Interact(gameObject);
                 }
             }
         }

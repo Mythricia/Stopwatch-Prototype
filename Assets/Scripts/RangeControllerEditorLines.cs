@@ -5,12 +5,12 @@ using System.Collections.Generic;
 [ExecuteInEditMode]
 public class RangeControllerEditorLines : MonoBehaviour
 {
-    private List<RangeTarget> rangeTargets = new List<RangeTarget>();
+    private List<BasicRangeTarget> rangeTargets = new List<BasicRangeTarget>();
     
 
     void Update()
     {
-        rangeTargets.AddRange(GetComponentsInChildren<RangeTarget>());
+        rangeTargets.AddRange(GetComponentsInChildren<BasicRangeTarget>());
 
 
         if (rangeTargets.Count != 0)
