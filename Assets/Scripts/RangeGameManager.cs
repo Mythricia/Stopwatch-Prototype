@@ -4,7 +4,9 @@ using UnityEngine.UI;
 
 public class RangeGameManager : MonoBehaviour
 {
-    public static RangeGameManager rgm;
+    // Using a Property, as to ensure a singleton instance of RangeGameManager
+    public static RangeGameManager rgm {get; private set;}
+
 
     public GameObject player;
 
@@ -31,19 +33,21 @@ public class RangeGameManager : MonoBehaviour
     public GameObject debugUI;
     public bool debugUiIsShowing = false;
 
-    public List<RangeController> ranges;
+    public List<BasicRangeController> ranges;
 
     private int rangesCompleted = 0;
+
+
+    // Assign this RangeGameManager as the singleton instance.
+    void Awake()
+    {
+        rgm = this;
+    }
 
 
     void Start()
     {
         timeLeft = timeToComplete;
-
-        if (rgm == null)
-        {
-            rgm = this.gameObject.GetComponent<RangeGameManager>();
-        }
 
         timeLeftDisplay.text = timeLeft.ToString("0.00");
 

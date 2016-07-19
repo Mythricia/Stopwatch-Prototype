@@ -1,18 +1,18 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 [SelectionBase]
-public class RangeTarget : MonoBehaviour
+public class BasicRangeTarget : MonoBehaviour
 {
-    private RangeController myController;
+    private BasicRangeController myController;
     private TargetHint[] myHints;
-    [Space(10)]
-    public GameObject hitPrefab;
-    // Add explosion prefab
 
-    public void enableTarget(bool active)
+    public GameObject hitPrefab;
+
+
+    public void Enable()
     {
-        GetComponent<Renderer>().enabled = active;
-        GetComponent<Collider>().enabled = active;
+        GetComponent<Renderer>().enabled = true;
+        GetComponent<Collider>().enabled = true;
 
         if (myHints != null)
         {
@@ -24,10 +24,10 @@ public class RangeTarget : MonoBehaviour
     }
 
 
-    public void Setup(bool active, RangeController newController)
+    public void Setup(BasicRangeController newController)
     {
-        GetComponent<Renderer>().enabled = active;
-        GetComponent<Collider>().enabled = active;
+        GetComponent<Renderer>().enabled = false;
+        GetComponent<Collider>().enabled = false;
 
         myController = newController;
         myHints = transform.parent.GetComponentsInChildren<TargetHint>();
@@ -39,19 +39,15 @@ public class RangeTarget : MonoBehaviour
         if (hitPrefab != null)
             Instantiate(hitPrefab, transform.position, transform.rotation);
 
-        // only do stuff if hit by a projectile
         if (other.gameObject.tag == "Projectile")
         {
-            Die();
+            WasHit();
         }
     }
 
 
-    private void Die()
+    void WasHit()
     {
-        if (!myController)
-            return;
-
         if (myHints != null)
         {
             foreach (var hint in myHints)
@@ -60,6 +56,13 @@ public class RangeTarget : MonoBehaviour
             }
         }
 
-        myController.TargetDied(this);
+        myController.TargetHit(this);
+    }
+
+
+    public void Disable()
+    {
+        gameObject.GetComponent<Renderer>().enabled = false;
+        gameObject.GetComponent<Collider>().enabled = false;
     }
 }
