@@ -3,8 +3,6 @@
 
 public abstract class RangeTrigger : MonoBehaviour
 {
-    RangeController myRangeController;
-
     public abstract void Start();
     public abstract void Update();
 
