@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
         if (canJump && Input.GetKeyDown("space") && myController.isGrounded)
             movement.y = jumpPower;
 
+
         myController.Move(movement * Time.deltaTime);
     }
 
