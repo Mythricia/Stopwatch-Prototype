@@ -2110,6 +2110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e3a3a7239c1e6f408c936d1d09abbba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactable: 1
   triggerDist: 3
   closeColor:
     serializedVersion: 2
@@ -3751,6 +3752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e3a3a7239c1e6f408c936d1d09abbba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactable: 1
   triggerDist: 3
   closeColor:
     serializedVersion: 2
@@ -6952,6 +6954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e3a3a7239c1e6f408c936d1d09abbba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactable: 1
   triggerDist: 3
   closeColor:
     serializedVersion: 2
@@ -10107,34 +10110,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 449084, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11419920, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
-      propertyPath: defaultRecoveryPosition.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 11419920, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
-      propertyPath: defaultRecoveryPosition.y
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 11419920, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
-      propertyPath: defaultRecoveryPosition.z
-      value: -102.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 11444904, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
-      propertyPath: fireRate
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 11444904, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
-      propertyPath: limitFireRate
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11444904, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
-      propertyPath: limitBounces
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 11444904, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
       propertyPath: bounceToggle
       value: 
@@ -10143,42 +10118,6 @@ Prefab:
       propertyPath: rateToggle
       value: 
       objectReference: {fileID: 1735419503}
-    - target: {fileID: 11444904, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11478332, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11478332, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
-      propertyPath: smooth
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11478332, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
-      propertyPath: smoothTime
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 11478332, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
-      propertyPath: XSensitivity
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11478332, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
-      propertyPath: YSensitivity
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2014562, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
-      propertyPath: m_HDR
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11419920, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
-      propertyPath: smoothMovement
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 14390798, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
-      propertyPath: m_MinMoveDistance
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
   m_IsPrefabParent: 0

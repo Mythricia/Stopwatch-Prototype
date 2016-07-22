@@ -808,6 +808,18 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 196630, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
   m_PrefabInternal: {fileID: 1759623473}
+--- !u!114 &352072817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 352072812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffa56eaeeb1f6de4a8ba4c5abf2eb427, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfSamples: 10
 --- !u!1001 &390469990
 Prefab:
   m_ObjectHideFlags: 0
@@ -935,6 +947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e3a3a7239c1e6f408c936d1d09abbba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactable: 1
   triggerDist: 3
   closeColor:
     serializedVersion: 2
@@ -3508,6 +3521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e3a3a7239c1e6f408c936d1d09abbba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactable: 1
   triggerDist: 3
   closeColor:
     serializedVersion: 2
@@ -4175,7 +4189,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11419920, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
       propertyPath: smoothMovement
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11419920, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
       propertyPath: defaultRecoveryPosition.x
@@ -4188,6 +4202,14 @@ Prefab:
     - target: {fileID: 11419920, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
       propertyPath: defaultRecoveryPosition.z
       value: -4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2014562, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
+      propertyPath: field of view
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 11419920, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
+      propertyPath: moveSpeed
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
