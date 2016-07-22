@@ -3,6 +3,8 @@
 
 public abstract class RangeTrigger : MonoBehaviour
 {
+    public bool interactable = true;
+
     public abstract void Start();
     public abstract void Update();
 

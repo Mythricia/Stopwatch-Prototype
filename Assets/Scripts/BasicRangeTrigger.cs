@@ -11,8 +11,6 @@ public class BasicRangeTrigger : RangeTrigger
     private float distanceToPlayer;
     private Vector3 myPosition;
 
-    private bool interactable = true;
-
     private Renderer myRenderer;
 
     private Color32 idleColor;  // Defaults to current object material color
@@ -59,17 +57,12 @@ public class BasicRangeTrigger : RangeTrigger
         if(interactable)
         {
             myController.Enable();
+            interactable = false;
+            myRenderer.material.color = enabledColor;
         }
     }
 
-
-   void ButtonPressed()
-    {
-        interactable = false;
-        myRenderer.material.color = enabledColor;
-    }
-
-
+    
     public override void Sleep()
     {
         interactable = false;

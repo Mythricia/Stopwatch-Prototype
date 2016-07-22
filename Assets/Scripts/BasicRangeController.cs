@@ -47,7 +47,7 @@ public class BasicRangeController : RangeController
 
         foreach (var trig in myTriggers)
         {
-            trig.Trigger();
+            trig.interactable = false;
         }
 
 
