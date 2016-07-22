@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [SelectionBase]
-class BasicRangeTarget : RangeTarget
+public class BasicRangeTarget : RangeTarget
 {
     private RangeController myController;
     private TargetHint[] myHints;
@@ -34,7 +34,7 @@ class BasicRangeTarget : RangeTarget
     }
 
 
-    protected override void OnCollisionEnter(Collision other)
+    public override void OnCollisionEnter(Collision other)
     {
         if (hitPrefab != null)
             Instantiate(hitPrefab, transform.position, transform.rotation);

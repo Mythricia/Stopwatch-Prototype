@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-
-class BasicRangeController : RangeController
+[SelectionBase]
+public class BasicRangeController : RangeController
 {
     private List<RangeTarget> myTargets = new List<RangeTarget>();
     private List<BasicRangeTrigger> myTriggers = new List<BasicRangeTrigger>();
@@ -12,7 +12,7 @@ class BasicRangeController : RangeController
     private int numTargets;
 
 
-    protected override void Start()
+    public override void Start()
     {
         if (Initialize() == false)
         {
@@ -28,7 +28,7 @@ class BasicRangeController : RangeController
     }
 
 
-    protected override void Update()
+    public override void Update()
     {
         if (!hasInitialized || !isActive)
             return;

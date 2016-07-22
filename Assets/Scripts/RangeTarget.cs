@@ -8,7 +8,7 @@ public abstract class RangeTarget : MonoBehaviour
 
     public abstract void Setup(RangeController newController);
 
-    protected abstract void OnCollisionEnter(Collision other);
+    public abstract void OnCollisionEnter(Collision other);
     protected abstract void WasHit();
 
     public abstract void Enable();

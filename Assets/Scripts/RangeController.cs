@@ -6,8 +6,8 @@ public abstract class RangeController : MonoBehaviour
     protected bool isActive = false;
 
 
-    protected abstract void Start();
-    protected abstract void Update();
+    public abstract void Start();
+    public abstract void Update();
 
 
     public abstract void Enable();

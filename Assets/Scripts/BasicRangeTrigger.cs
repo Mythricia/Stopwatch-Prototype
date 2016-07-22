@@ -1,7 +1,7 @@
 using UnityEngine;
 
-
-class BasicRangeTrigger : RangeTrigger
+[SelectionBase]
+public class BasicRangeTrigger : RangeTrigger
 {
     RangeController myController;
 
@@ -20,7 +20,7 @@ class BasicRangeTrigger : RangeTrigger
     public Color32 enabledColor = new Color32(0, 0, 255, 255);
     public Color32 disabledColor = new Color32(25, 25, 25, 255);
 
-    protected override void Start()
+    public override void Start()
     {
         if (GameObject.FindWithTag("Player") != null)
             player = GameObject.FindWithTag("Player").GetComponent<Transform>();
@@ -33,7 +33,7 @@ class BasicRangeTrigger : RangeTrigger
     }
 
 
-    protected override void Update()
+    public override void Update()
     {
         if (player == null || interactable == false)
             return;
