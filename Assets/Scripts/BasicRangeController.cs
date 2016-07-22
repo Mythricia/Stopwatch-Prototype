@@ -2,19 +2,17 @@ using UnityEngine;
 using System.Collections.Generic;
 
 
-public class BasicRangeController : MonoBehaviour
+class BasicRangeController : RangeController
 {
-    private List<BasicRangeTarget> myTargets = new List<BasicRangeTarget>();
+    private List<RangeTarget> myTargets = new List<RangeTarget>();
     private List<BasicRangeTrigger> myTriggers = new List<BasicRangeTrigger>();
 
     private bool hasInitialized = false;
-    private bool isActive = false;
 
     private int numTargets;
 
 
-
-    void Start()
+    protected override void Start()
     {
         if (Initialize() == false)
         {
@@ -30,7 +28,7 @@ public class BasicRangeController : MonoBehaviour
     }
 
 
-    void Update()
+    protected override void Update()
     {
         if (!hasInitialized || !isActive)
             return;
@@ -40,7 +38,7 @@ public class BasicRangeController : MonoBehaviour
     }
 
 
-    public void Enable()
+    public override void Enable()
     {
         foreach (var tar in myTargets)
         {
@@ -49,7 +47,7 @@ public class BasicRangeController : MonoBehaviour
 
         foreach (var trig in myTriggers)
         {
-            trig.ButtonPressed();
+            trig.Trigger();
         }
 
 
@@ -59,7 +57,7 @@ public class BasicRangeController : MonoBehaviour
     }
 
 
-    void Disable()
+    public override void Disable()
     {
         RangeGameManager.rgm.RangeCompleted();
         RangeGameManager.rgm.StopTimer();
@@ -75,7 +73,7 @@ public class BasicRangeController : MonoBehaviour
     }
 
 
-    public void TargetHit(BasicRangeTarget target)
+    public override void TargetHit(RangeTarget target)
     {
         target.Disable();
 
@@ -83,7 +81,7 @@ public class BasicRangeController : MonoBehaviour
     }
 
 
-    bool Initialize()
+    protected override bool Initialize()
     {
         myTargets.AddRange(GetComponentsInChildren<BasicRangeTarget>());
         myTriggers.AddRange(GetComponentsInChildren<BasicRangeTrigger>());

@@ -1,101 +1,20 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 
-public class RangeController : MonoBehaviour
+public abstract class RangeController : MonoBehaviour
 {
-    public bool startActive = false;
-
-    private List<RangeTarget> rangeTargets = new List<RangeTarget>();
-    private ConsoleButton[] consoleButtons;
-
-    private bool hasInitialized = false;
-    private bool isActive = false;
+    protected bool isActive = false;
 
 
-    void Start()
-    {
-        if (!hasInitialized)
-        {
-            Initialize();
-        }
-    }
+    protected abstract void Start();
+    protected abstract void Update();
 
 
-    void Update()
-    {
-        if (isActive && rangeTargets.Count == 0)
-        {
-            RangeGameManager.rgm.RangeCompleted();
-            RangeGameManager.rgm.StopTimer();
-            Debug.Log("Range #" + GetInstanceID() + " has shut down.");
-
-            foreach (var button in consoleButtons)
-            {
-                button.Sleep();
-            }
-
-            isActive = false;
-        }
-    }
+    public abstract void Enable();
+    public abstract void Disable();
 
 
+    protected abstract bool Initialize();
 
-    public void ButtonPressed()
-    {
-        foreach (var target in rangeTargets)
-        {
-            target.enableTarget(true);
-        }
-
-        foreach (var button in consoleButtons)
-        {
-            // FIXME: This is an ugly back-and-forth.. Button tells us it was pushed, and then we call it back saying hey, you were pushed.
-            //        Not a huge deal, but it's really clunky and can easily be done better
-            
-            button.ButtonPressed();
-        }
-
-        isActive = true;
-
-        RangeGameManager.rgm.StartTimer();
-    }
-
-
-    void Initialize()
-    {
-        hasInitialized = true;
-
-        rangeTargets.AddRange(GetComponentsInChildren<RangeTarget>());
-
-        consoleButtons = GetComponentsInChildren<ConsoleButton>();
-
-        if (rangeTargets.Count == 0)
-            return;
-
-
-        if (consoleButtons.Length != 0)
-        {
-            foreach (var button in consoleButtons)
-            {
-                button.Setup(this);
-            }
-        }
-
-
-        foreach (var target in rangeTargets)
-        {
-            target.Setup(startActive, this);
-        }
-
-    }
-
-
-    public void TargetDied(RangeTarget target)
-    {
-        rangeTargets.Remove(target);
-
-        target.gameObject.GetComponent<Renderer>().enabled = false;
-        target.gameObject.GetComponent<Collider>().enabled = false;
-    }
+    public abstract void TargetHit(RangeTarget target);
 }

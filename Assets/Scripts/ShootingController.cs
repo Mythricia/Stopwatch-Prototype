@@ -85,7 +85,7 @@ public class ShootingController : MonoBehaviour
             {
                 if (hit.collider.gameObject.GetComponent<BasicRangeTrigger>() != null)
                 {
-                    hit.collider.gameObject.GetComponent<BasicRangeTrigger>().Interact(gameObject);
+                    hit.collider.gameObject.GetComponent<BasicRangeTrigger>().Trigger();
                 }
             }
         }

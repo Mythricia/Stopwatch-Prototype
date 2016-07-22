@@ -1,65 +1,16 @@
 ﻿using UnityEngine;
 
-[SelectionBase]
-public class RangeTarget : MonoBehaviour
+
+public abstract class RangeTarget : MonoBehaviour
 {
-    private RangeController myController;
-    private TargetHint[] myHints;
-    [Space(10)]
-    public GameObject hitPrefab;
-    // Add explosion prefab
-
-    public void enableTarget(bool active)
-    {
-        GetComponent<Renderer>().enabled = active;
-        GetComponent<Collider>().enabled = active;
-
-        if (myHints != null)
-        {
-            foreach (var hint in myHints)
-            {
-                hint.Activate();
-            }
-        }
-    }
+    RangeController myController;
 
 
-    public void Setup(bool active, RangeController newController)
-    {
-        GetComponent<Renderer>().enabled = active;
-        GetComponent<Collider>().enabled = active;
+    public abstract void Setup(RangeController newController);
 
-        myController = newController;
-        myHints = transform.parent.GetComponentsInChildren<TargetHint>();
-    }
+    protected abstract void OnCollisionEnter(Collision other);
+    protected abstract void WasHit();
 
-
-    void OnCollisionEnter(Collision other)
-    {
-        if (hitPrefab != null)
-            Instantiate(hitPrefab, transform.position, transform.rotation);
-
-        // only do stuff if hit by a projectile
-        if (other.gameObject.tag == "Projectile")
-        {
-            Die();
-        }
-    }
-
-
-    private void Die()
-    {
-        if (!myController)
-            return;
-
-        if (myHints != null)
-        {
-            foreach (var hint in myHints)
-            {
-                hint.Deactivate();
-            }
-        }
-
-        myController.TargetDied(this);
-    }
+    public abstract void Enable();
+    public abstract void Disable();
 }

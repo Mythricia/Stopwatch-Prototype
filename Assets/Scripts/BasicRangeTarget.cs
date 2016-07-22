@@ -1,15 +1,15 @@
 using UnityEngine;
 
 [SelectionBase]
-public class BasicRangeTarget : MonoBehaviour
+class BasicRangeTarget : RangeTarget
 {
-    private BasicRangeController myController;
+    private RangeController myController;
     private TargetHint[] myHints;
 
     public GameObject hitPrefab;
 
 
-    public void Enable()
+    public override void Enable()
     {
         GetComponent<Renderer>().enabled = true;
         GetComponent<Collider>().enabled = true;
@@ -24,7 +24,7 @@ public class BasicRangeTarget : MonoBehaviour
     }
 
 
-    public void Setup(BasicRangeController newController)
+    public override void Setup(RangeController newController)
     {
         GetComponent<Renderer>().enabled = false;
         GetComponent<Collider>().enabled = false;
@@ -34,7 +34,7 @@ public class BasicRangeTarget : MonoBehaviour
     }
 
 
-    void OnCollisionEnter(Collision other)
+    protected override void OnCollisionEnter(Collision other)
     {
         if (hitPrefab != null)
             Instantiate(hitPrefab, transform.position, transform.rotation);
@@ -46,7 +46,7 @@ public class BasicRangeTarget : MonoBehaviour
     }
 
 
-    void WasHit()
+    protected override void WasHit()
     {
         if (myHints != null)
         {
@@ -60,7 +60,7 @@ public class BasicRangeTarget : MonoBehaviour
     }
 
 
-    public void Disable()
+    public override void Disable()
     {
         gameObject.GetComponent<Renderer>().enabled = false;
         gameObject.GetComponent<Collider>().enabled = false;

@@ -1,15 +1,16 @@
 using UnityEngine;
 
 
-public class BasicRangeTrigger : MonoBehaviour
+class BasicRangeTrigger : RangeTrigger
 {
+    RangeController myController;
+
     public float triggerDist = 3.0f;
 
     private Transform player;
     private float distanceToPlayer;
     private Vector3 myPosition;
 
-    private BasicRangeController myController;
     private bool interactable = true;
 
     private Renderer myRenderer;
@@ -19,7 +20,7 @@ public class BasicRangeTrigger : MonoBehaviour
     public Color32 enabledColor = new Color32(0, 0, 255, 255);
     public Color32 disabledColor = new Color32(25, 25, 25, 255);
 
-    void Start()
+    protected override void Start()
     {
         if (GameObject.FindWithTag("Player") != null)
             player = GameObject.FindWithTag("Player").GetComponent<Transform>();
@@ -32,7 +33,7 @@ public class BasicRangeTrigger : MonoBehaviour
     }
 
 
-    void Update()
+    protected override void Update()
     {
         if (player == null || interactable == false)
             return;
@@ -47,13 +48,13 @@ public class BasicRangeTrigger : MonoBehaviour
 
 
 
-    public void Setup(BasicRangeController controller)
+    public override void Setup(RangeController controller)
     {
         myController = controller;
     }
 
 
-    public void Interact(GameObject actor)
+    public override void Trigger()
     {
         if(interactable)
         {
@@ -62,14 +63,14 @@ public class BasicRangeTrigger : MonoBehaviour
     }
 
 
-    public void ButtonPressed()
+   void ButtonPressed()
     {
         interactable = false;
         myRenderer.material.color = enabledColor;
     }
 
 
-    public void Sleep()
+    public override void Sleep()
     {
         interactable = false;
         myRenderer.material.color = disabledColor;
