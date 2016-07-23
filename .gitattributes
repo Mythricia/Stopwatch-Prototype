@@ -19,3 +19,4 @@
 *.unity binary
 *.prefab binary
 *.asset binary
+*.meta binary
