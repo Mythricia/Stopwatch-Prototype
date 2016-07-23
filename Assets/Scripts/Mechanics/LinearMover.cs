@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Target_LinearMover : MonoBehaviour
+public class LinearMover : MonoBehaviour
 {
 
     // Boilerplate and EditorInspector vars
