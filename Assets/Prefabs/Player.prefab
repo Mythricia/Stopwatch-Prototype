@@ -13,6 +13,7 @@ GameObject:
   - 114: {fileID: 11478332}
   - 114: {fileID: 11426890}
   - 114: {fileID: 11499702}
+  - 114: {fileID: 11412148}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -32,7 +33,6 @@ GameObject:
   - 92: {fileID: 9283274}
   - 124: {fileID: 12412880}
   - 81: {fileID: 8105900}
-  - 114: {fileID: 11444904}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -115,6 +115,21 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 197812}
   m_Enabled: 1
+--- !u!114 &11412148
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5936c8efb1a522f4e9837c6b96336771, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerWeapons:
+  - {fileID: 11482896, guid: 8b109757eff6d134da25e76d9498c0b4, type: 2}
+  weaponIndex: 0
+  interactRange: 3
 --- !u!114 &11419920
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -145,25 +160,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfSamples: 10
---- !u!114 &11444904
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 197812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5936c8efb1a522f4e9837c6b96336771, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 134974, guid: 30ce812d2f85b764aa6125f312ca2700, type: 2}
-  power: 200
-  shootSFX: {fileID: 8300000, guid: 2e5bb393359494640b4d8676468a9e6a, type: 3}
-  sfxVolume: 1
-  interactRange: 3
-  fireRate: 0.25
-  bounceToggle: {fileID: 0}
-  rateToggle: {fileID: 0}
 --- !u!114 &11478332
 MonoBehaviour:
   m_ObjectHideFlags: 1
