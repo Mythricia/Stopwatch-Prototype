@@ -3,7 +3,6 @@
 public class Debug_Speedometer : MonoBehaviour
 {
     Vector3 lastPosition = Vector3.zero;
-    float dist = 0f;
 
     public int numberOfSamples = 10;
 
@@ -23,7 +22,7 @@ public class Debug_Speedometer : MonoBehaviour
 
     void Update()
     {
-        distSamples[index % distSamples.Length] = dist = Vector3.Distance(lastPosition, transform.position);
+        distSamples[index % distSamples.Length] = Vector3.Distance(lastPosition, transform.position);
         index++;
 
         lastPosition = transform.position;

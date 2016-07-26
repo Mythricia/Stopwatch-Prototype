@@ -1,60 +1,57 @@
 ﻿using UnityEngine;
 
-public class Weapon_BasicProjectile : MonoBehaviour
+public class Weapon_BasicProjectile : Weapon
 {
+    public GameObject projectile;   // Projectile prefab that the player shoots
+    public float power = 200.0f;    // Force of said projectile
 
-    public float timeOut = 1.0f;
-    public bool detachChildren = false;
-    public GameObject hitParticle;
-    bool limitBounces = false;
-    public int bounceLimit = 2;
-    private int numBounces = 0;
+    // Reference to AudioClip to play
+    public AudioClip shootSFX;
+    public float sfxVolume = 1.0f;
+
+    public float fireRate = 0.15f;
+    private float lastFired = 0f;
 
 
-    void Awake()
+    public override void FireWeapon()
     {
-        bounceLimit = Mathf.Clamp(bounceLimit, 0, 100);
-        // invoke the DestroyNow funtion to run after timeOut seconds
-        Invoke("DestroyNow", timeOut);
-    }
-
-
-    // destroy projectile _immediately_ if we hit a RangeTarget, else count towards bounce limit
-    void OnCollisionEnter(Collision newCollision)
-    {
-        if (newCollision.gameObject.tag == "RangeTarget")
+        if (projectile != null && IsReady())
         {
-            if (hitParticle)
+            // Instantiante projectile at the camera + 1 meter forward with camera rotation
+            GameObject newProjectile = Instantiate(projectile, playerCameraTransform.position + playerCameraTransform.forward, playerCameraTransform.rotation) as GameObject;
+
+            newProjectile.GetComponent<Rigidbody>().AddForce(playerCameraTransform.forward * power, ForceMode.VelocityChange);
+
+            lastFired = Time.time;
+
+            // play sound effect if set
+            if (shootSFX)
             {
-                Instantiate(hitParticle, transform.position, Quaternion.Euler(0, 180, 0));
+                if (newProjectile.GetComponent<AudioSource>())
+                { // the projectile has an AudioSource component
+                  // play the sound clip through the AudioSource component on the gameobject.
+                  // note: The audio will travel with the gameobject.
+                    newProjectile.GetComponent<AudioSource>().PlayOneShot(shootSFX, sfxVolume);
+                }
+                else
+                {
+                    // dynamically create a new gameObject with an AudioSource
+                    // this automatically destroys itself once the audio is done
+                    AudioSource.PlayClipAtPoint(shootSFX, newProjectile.transform.position, sfxVolume);
+                }
             }
-
-            Destroy(gameObject);
-        }
-        else if (limitBounces)
-        {
-            if (numBounces >= bounceLimit)
-                Destroy(gameObject);
-
-            numBounces++;
         }
     }
 
 
-    public void DestroyNow()
+    public override bool IsReady()
     {
-        if (detachChildren)
-        { // detach the children before destroying if specified
-            transform.DetachChildren();
-        }
-
-        // destory the game Object
-        Destroy(gameObject);
+        return (Time.time - lastFired >= fireRate);
     }
 
 
-    public void setBounces(bool toggle)
+    public override void Initialize()
     {
-        limitBounces = toggle;
+        lastFired = 0f;
     }
 }
