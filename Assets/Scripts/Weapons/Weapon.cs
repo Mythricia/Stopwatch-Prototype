@@ -2,12 +2,15 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
-    protected Transform playerCameraTransform;
+    protected static Transform playerCameraTransform;
 
-    void Awake()
+
+    // Assign variable at compile time
+    static Weapon()
     {
         playerCameraTransform = Camera.main.transform;
     }
+
 
     public abstract bool IsReady();
 

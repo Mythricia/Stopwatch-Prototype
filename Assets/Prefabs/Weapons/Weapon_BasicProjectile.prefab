@@ -45,6 +45,7 @@ MonoBehaviour:
   shootSFX: {fileID: 8300000, guid: 2e5bb393359494640b4d8676468a9e6a, type: 3}
   sfxVolume: 1
   fireRate: 0.15
+  lastFired: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

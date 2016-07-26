@@ -3017,13 +3017,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 352072812}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5936c8efb1a522f4e9837c6b96336771, type: 3}
+  m_Script: {fileID: 11500000, guid: c2f86d9638971fd48967009e7379269b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerWeapons:
-  - {fileID: 11482896, guid: 8b109757eff6d134da25e76d9498c0b4, type: 2}
-  weaponIndex: 0
-  interactRange: 3
+  shootSFX: {fileID: 8300000, guid: 755276bb3bd1914498644575f56cd5ea, type: 3}
+  sfxVolume: 1
+  fireRate: 0.15
+--- !u!114 &352072820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 352072812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4df554a7c0a7b6449443ca4b46ceccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 134974, guid: 30ce812d2f85b764aa6125f312ca2700, type: 2}
+  power: 200
+  shootSFX: {fileID: 8300000, guid: 2e5bb393359494640b4d8676468a9e6a, type: 3}
+  sfxVolume: 1
+  fireRate: 0.15
+  lastFired: 0
 --- !u!1 &378401265
 GameObject:
   m_ObjectHideFlags: 0
@@ -10119,16 +10135,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11444904, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
-      propertyPath: bounceToggle
+    - target: {fileID: 11412148, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
+      propertyPath: playerWeapons.Array.data[0]
       value: 
-      objectReference: {fileID: 1698553183}
-    - target: {fileID: 11444904, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
-      propertyPath: rateToggle
-      value: 
-      objectReference: {fileID: 1735419503}
-    m_RemovedComponents:
-    - {fileID: 11444904, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
+      objectReference: {fileID: 11482896, guid: 8b109757eff6d134da25e76d9498c0b4,
+        type: 2}
+    - target: {fileID: 11412148, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
+      propertyPath: weaponIndex
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1765038416

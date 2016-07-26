@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class ShootingController : MonoBehaviour
 {
-    public List<Weapon> playerWeapons = new List<Weapon>();
+    private List<Weapon> myWeapons = new List<Weapon>();
     public int weaponIndex = 0;
 
 
@@ -17,18 +17,16 @@ public class ShootingController : MonoBehaviour
     public void Start()
     {
         playerCameraTransform = Camera.main.transform;
-        foreach (Weapon weap in playerWeapons)
-        {
-            weap.Initialize();
-        }
+
+        myWeapons.AddRange(gameObject.GetComponents<Weapon>());
     }
 
 
     public void Update()
     {
-        if (Input.GetButtonDown("Fire1") && MouseLooker.doRotation)
+        if (Input.GetButtonDown("Fire1") && MouseLooker.doRotation && myWeapons.Count != 0)
         {
-            playerWeapons[weaponIndex].FireWeapon();
+            myWeapons[weaponIndex].FireWeapon();
         }
 
 

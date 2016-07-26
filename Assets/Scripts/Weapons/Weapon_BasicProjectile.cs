@@ -5,12 +5,13 @@ public class Weapon_BasicProjectile : Weapon
     public GameObject projectile;   // Projectile prefab that the player shoots
     public float power = 200.0f;    // Force of said projectile
 
+
     // Reference to AudioClip to play
     public AudioClip shootSFX;
     public float sfxVolume = 1.0f;
 
     public float fireRate = 0.15f;
-    private float lastFired = 0f;
+    public float lastFired = 0f;
 
 
     public override void FireWeapon()
@@ -18,7 +19,8 @@ public class Weapon_BasicProjectile : Weapon
         if (projectile != null && IsReady())
         {
             // Instantiante projectile at the camera + 1 meter forward with camera rotation
-            GameObject newProjectile = Instantiate(projectile, playerCameraTransform.position + playerCameraTransform.forward, playerCameraTransform.rotation) as GameObject;
+            GameObject newProjectile = Instantiate(projectile, playerCameraTransform.position + playerCameraTransform.forward,
+                                                   playerCameraTransform.rotation) as GameObject;
 
             newProjectile.GetComponent<Rigidbody>().AddForce(playerCameraTransform.forward * power, ForceMode.VelocityChange);
 
@@ -52,6 +54,5 @@ public class Weapon_BasicProjectile : Weapon
 
     public override void Initialize()
     {
-        lastFired = 0f;
     }
 }
