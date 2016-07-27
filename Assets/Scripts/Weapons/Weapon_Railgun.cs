@@ -2,7 +2,9 @@
 
 public class Weapon_Railgun : Weapon
 {
-	public AudioClip shootSFX;
+    Transform playerCameraTransform;
+
+    public AudioClip shootSFX;
     public float sfxVolume = 1.0f;
 
     public float fireRate = 0.15f;
@@ -11,16 +13,16 @@ public class Weapon_Railgun : Weapon
 
     public override bool IsReady()
     {
-		return false;
+        return false;
     }
 
     public override void FireWeapon()
     {
-		AudioSource.PlayClipAtPoint(shootSFX, playerCameraTransform.position);
+        AudioSource.PlayClipAtPoint(shootSFX, playerCameraTransform.position);
     }
 
     public override void Initialize()
     {
-
+        playerCameraTransform = Camera.main.transform;
     }
 }

@@ -4,6 +4,7 @@ public class Weapon_BasicProjectile : Weapon
 {
     public GameObject projectile;   // Projectile prefab that the player shoots
     public float power = 200.0f;    // Force of said projectile
+    Transform playerCameraTransform;
 
 
     // Reference to AudioClip to play
@@ -54,5 +55,6 @@ public class Weapon_BasicProjectile : Weapon
 
     public override void Initialize()
     {
+        playerCameraTransform = Camera.main.transform;
     }
 }

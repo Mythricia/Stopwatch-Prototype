@@ -19,6 +19,13 @@ public class ShootingController : MonoBehaviour
         playerCameraTransform = Camera.main.transform;
 
         myWeapons.AddRange(gameObject.GetComponents<Weapon>());
+
+        myWeapons.Reverse();
+
+        foreach (var weapon in myWeapons)
+        {
+            weapon.Initialize();
+        }
     }
 
 
