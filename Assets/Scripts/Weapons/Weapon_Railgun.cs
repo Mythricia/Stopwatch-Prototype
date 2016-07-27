@@ -21,7 +21,7 @@ public class Weapon_Railgun : Weapon
             Ray ray = new Ray(playerCameraTransform.position + playerCameraTransform.forward, playerCameraTransform.forward);
             Vector3 hitLocation = playerCameraTransform.forward * beamRange;
 
-            RaycastHit[] rayHits = Physics.RaycastAll(ray, beamRange);
+            RaycastHit[] rayHits = Physics.RaycastAll(ray, beamRange, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore);
 
             rayHits = rayHits.OrderBy(h => h.distance).ToArray();
 
@@ -50,12 +50,12 @@ public class Weapon_Railgun : Weapon
             if (beamPrefab)
             {
                 GameObject beam = Instantiate(beamPrefab, playerCameraTransform.position + playerCameraTransform.forward, playerCameraTransform.rotation) as GameObject;
-                beam.GetComponent<Projectile_Railgun>().Initialize(playerCameraTransform.position, hitLocation);
+                beam.GetComponent<ProjectileGraphic_Railgun>().Initialize(playerCameraTransform.position, hitLocation);
             }
 
 
             lastFired = Time.time;
-            AudioSource.PlayClipAtPoint(shootSFX, playerCameraTransform.position);
+            AudioSource.PlayClipAtPoint(shootSFX, playerCameraTransform.position + playerCameraTransform.forward, sfxVolume);
         }
     }
 

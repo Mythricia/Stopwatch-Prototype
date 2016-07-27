@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 464846}
   - 120: {fileID: 12045556}
-  - 114: {fileID: 11428118}
+  - 114: {fileID: 11443230}
   m_Layer: 0
   m_Name: RailgunBeam
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11428118
+--- !u!114 &11443230
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -38,13 +38,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 173662}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21d703324e9b28946bc88aa4908929b2, type: 3}
+  m_Script: {fileID: 11500000, guid: ae8c6932c35558249b985088ca14f19d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beamColorStart: {r: 0.7647059, g: 0.14619377, b: 0.4405199, a: 0}
-  beamColorEnd: {r: 0.8088235, g: 0.42225346, b: 0.6057518, a: 0}
   beamWidth: 0.1
-  beamLifeTime: 1
+  beamLifeTime: 0.75
 --- !u!120 &12045556
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -79,10 +77,10 @@ LineRenderer:
     endWidth: 1
     m_StartColor:
       serializedVersion: 2
-      rgba: 4294967295
+      rgba: 4291246847
     m_EndColor:
       serializedVersion: 2
-      rgba: 4294967295
+      rgba: 4291246636
   m_UseWorldSpace: 1
 --- !u!1001 &100100000
 Prefab:

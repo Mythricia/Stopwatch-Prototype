@@ -2,14 +2,11 @@
 
 
 [RequireComponent(typeof(LineRenderer))]
-public class Projectile_Railgun : MonoBehaviour
+public class ProjectileGraphic_Railgun : MonoBehaviour
 {
-    public Color beamColorStart;
-    public Color beamColorEnd;
-    public float beamWidth;
-    public float beamLifeTime = 1000f;
+    public float beamWidth = 0.1f;
+    public float beamLifeTime = 1f;
 
-    private float lengthOfBeam;
     private LineRenderer lr;
     private float creationTime;
 
@@ -19,14 +16,19 @@ public class Projectile_Railgun : MonoBehaviour
     {
         if (Time.time - creationTime >= beamLifeTime)
             Destroy(gameObject);
+
+        Color newColor = lr.material.color;
+        newColor.r = Mathf.Lerp(1, 0, (Time.time - creationTime));
+        newColor.b = Mathf.Lerp(1, 0, (Time.time - creationTime));
+
+        lr.material.color = newColor;
     }
 
     public void Initialize(Vector3 origin, Vector3 destination)
     {
-		lr = GetComponent<LineRenderer>();
+        lr = GetComponent<LineRenderer>();
         creationTime = Time.time;
 
-        lr.SetColors(beamColorStart, beamColorEnd);
         lr.SetWidth(beamWidth, beamWidth);
         lr.SetVertexCount(2);
 
