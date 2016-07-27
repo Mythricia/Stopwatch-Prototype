@@ -19,16 +19,20 @@ public class Projectile_BasicProjectile : MonoBehaviour
 
 
     // destroy projectile _immediately_ if we hit a RangeTarget, else count towards bounce limit
-    void OnCollisionEnter(Collision newCollision)
+    void OnCollisionEnter(Collision other)
     {
-        if (newCollision.gameObject.tag == "RangeTarget")
+        if (other.gameObject.tag == "RangeTarget")
         {
-            if (hitParticle)
+            if (other.gameObject.GetComponent<RangeTarget>().TryHit(gameObject))
             {
-                Instantiate(hitParticle, transform.position, Quaternion.Euler(0, 180, 0));
-            }
 
-            Destroy(gameObject);
+                if (hitParticle)
+                {
+                    Instantiate(hitParticle, transform.position, Quaternion.Euler(0, 180, 0));
+                }
+
+                Destroy(gameObject);
+            }
         }
         else if (limitBounces)
         {

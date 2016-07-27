@@ -3022,6 +3022,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootSFX: {fileID: 8300000, guid: 755276bb3bd1914498644575f56cd5ea, type: 3}
   sfxVolume: 0.75
+  beamPrefab: {fileID: 173662, guid: daa890da751f97c48bb56f38c93ba78a, type: 2}
   fireRate: 0.75
 --- !u!114 &352072820
 MonoBehaviour:
@@ -3039,7 +3040,6 @@ MonoBehaviour:
   shootSFX: {fileID: 8300000, guid: 2e5bb393359494640b4d8676468a9e6a, type: 3}
   sfxVolume: 0.75
   fireRate: 0.15
-  lastFired: 0
 --- !u!1 &378401265
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,15 +34,14 @@ public class BasicRangeTarget : RangeTarget
     }
 
 
-    public override void OnCollisionEnter(Collision other)
+    public override bool TryHit(GameObject other)
     {
+
         if (hitPrefab != null)
             Instantiate(hitPrefab, transform.position, transform.rotation);
 
-        if (other.gameObject.tag == "Projectile")
-        {
-            WasHit();
-        }
+        WasHit();
+        return true;
     }
 
 
