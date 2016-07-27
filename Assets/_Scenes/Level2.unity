@@ -3021,8 +3021,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootSFX: {fileID: 8300000, guid: 755276bb3bd1914498644575f56cd5ea, type: 3}
-  sfxVolume: 1
-  fireRate: 0.15
+  sfxVolume: 0.75
+  fireRate: 0.75
 --- !u!114 &352072820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3037,7 +3037,7 @@ MonoBehaviour:
   projectile: {fileID: 134974, guid: 30ce812d2f85b764aa6125f312ca2700, type: 2}
   power: 200
   shootSFX: {fileID: 8300000, guid: 2e5bb393359494640b4d8676468a9e6a, type: 3}
-  sfxVolume: 1
+  sfxVolume: 0.75
   fireRate: 0.15
   lastFired: 0
 --- !u!1 &378401265
@@ -10144,6 +10144,14 @@ Prefab:
       propertyPath: weaponIndex
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11412148, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
+      propertyPath: weaponIcons.Array.data[0]
+      value: 
+      objectReference: {fileID: 2800000, guid: cb6892541d06eb94e83f7405faa5fbfa, type: 3}
+    - target: {fileID: 11412148, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
+      propertyPath: weaponIcons.Array.data[1]
+      value: 
+      objectReference: {fileID: 2800000, guid: 85056160885fe514487111a54338eb8c, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
   m_IsPrefabParent: 0

@@ -9,10 +9,10 @@ public class Weapon_BasicProjectile : Weapon
 
     // Reference to AudioClip to play
     public AudioClip shootSFX;
-    public float sfxVolume = 1.0f;
+    public float sfxVolume = 0.75f;
 
     public float fireRate = 0.15f;
-    public float lastFired = 0f;
+    private float lastFired = 0f;
 
 
     public override void FireWeapon()

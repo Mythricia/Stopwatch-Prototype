@@ -6,6 +6,8 @@ public class ShootingController : MonoBehaviour
     private List<Weapon> myWeapons = new List<Weapon>();
     public int weaponIndex = 0;
 
+    public Texture2D[] weaponIcons = new Texture2D[2];
+
 
     // interaction stuff
     private Transform playerCameraTransform;
@@ -47,5 +49,23 @@ public class ShootingController : MonoBehaviour
                 }
             }
         }
+
+
+        if(Input.GetKeyDown("1"))
+        {
+            weaponIndex = 0;
+        }
+
+        if(Input.GetKeyDown("2"))
+        {
+            weaponIndex = 1;
+        }
     } // End of Update()
+
+
+    void OnGUI()
+    {
+            GUI.Label(new Rect(10, 500, 100, 20), "WeaponIndex: " + weaponIndex);
+            GUI.Label(new Rect(10, 564, 64, 64), weaponIcons[weaponIndex]);            
+    }
 }
