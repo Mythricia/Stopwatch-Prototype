@@ -6,6 +6,8 @@ public class ProjectileGraphic_Railgun : MonoBehaviour
 {
     public float beamWidth = 0.1f;
     public float beamLifeTime = 1f;
+    public Vector3 projectileOriginOffset = new Vector3(0, -0.2f, 0);
+
 
     private LineRenderer lr;
     private float creationTime;
@@ -26,6 +28,7 @@ public class ProjectileGraphic_Railgun : MonoBehaviour
 
     public void Initialize(Vector3 origin, Vector3 destination)
     {
+        origin += projectileOriginOffset;
         lr = GetComponent<LineRenderer>();
         creationTime = Time.time;
 

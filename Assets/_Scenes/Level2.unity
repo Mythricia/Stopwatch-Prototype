@@ -3009,37 +3009,6 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 196630, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
   m_PrefabInternal: {fileID: 1759623473}
---- !u!114 &352072813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 352072812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2f86d9638971fd48967009e7379269b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shootSFX: {fileID: 8300000, guid: 755276bb3bd1914498644575f56cd5ea, type: 3}
-  sfxVolume: 0.6
-  beamPrefab: {fileID: 173662, guid: daa890da751f97c48bb56f38c93ba78a, type: 2}
-  fireRate: 0.75
---- !u!114 &352072820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 352072812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4df554a7c0a7b6449443ca4b46ceccd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 134974, guid: 30ce812d2f85b764aa6125f312ca2700, type: 2}
-  power: 200
-  shootSFX: {fileID: 8300000, guid: 2e5bb393359494640b4d8676468a9e6a, type: 3}
-  sfxVolume: 0.75
-  fireRate: 0.25
 --- !u!1 &378401265
 GameObject:
   m_ObjectHideFlags: 0
@@ -10135,23 +10104,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11412148, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
-      propertyPath: playerWeapons.Array.data[0]
-      value: 
-      objectReference: {fileID: 11482896, guid: 8b109757eff6d134da25e76d9498c0b4,
-        type: 2}
-    - target: {fileID: 11412148, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
-      propertyPath: weaponIndex
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11412148, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
-      propertyPath: weaponIcons.Array.data[0]
-      value: 
-      objectReference: {fileID: 2800000, guid: cb6892541d06eb94e83f7405faa5fbfa, type: 3}
-    - target: {fileID: 11412148, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
-      propertyPath: weaponIcons.Array.data[1]
-      value: 
-      objectReference: {fileID: 2800000, guid: 85056160885fe514487111a54338eb8c, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
   m_IsPrefabParent: 0

@@ -728,7 +728,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!1 &316641296
 GameObject:
   m_ObjectHideFlags: 0
@@ -1224,7 +1224,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1759623474}
+      - m_Target: {fileID: 0}
         m_MethodName: toggleLimitBounces
         m_Mode: 1
         m_Arguments:
@@ -2260,7 +2260,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!114 &862628634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4211,15 +4211,21 @@ Prefab:
       propertyPath: moveSpeed
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 11444798, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
+      propertyPath: sfxVolume
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 11461346, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
+      propertyPath: sfxVolume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11444798, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
+      propertyPath: shootSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: e0a1900d8e014bc42bd85753a73c18dc, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 93860d9b1c7e5374f99cd9c4486afe86, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &1759623474 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11444904, guid: 93860d9b1c7e5374f99cd9c4486afe86,
-    type: 2}
-  m_PrefabInternal: {fileID: 1759623473}
-  m_Script: {fileID: 11500000, guid: 5936c8efb1a522f4e9837c6b96336771, type: 3}
 --- !u!1 &1776647067
 GameObject:
   m_ObjectHideFlags: 0
@@ -4973,7 +4979,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1759623474}
+      - m_Target: {fileID: 0}
         m_MethodName: toggleFireRate
         m_Mode: 1
         m_Arguments:

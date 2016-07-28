@@ -8,10 +8,12 @@ public class Weapon_Railgun : Weapon
     public AudioClip shootSFX;
     public float sfxVolume = 0.75f;
     public GameObject beamPrefab;
+    private AudioSource myAudioSource;
 
     public float fireRate = 0.75f;
     private float lastFired = 0f;
     private float beamRange = 1000f;
+
 
 
     public override void FireWeapon()
@@ -55,7 +57,9 @@ public class Weapon_Railgun : Weapon
 
 
             lastFired = Time.time;
-            AudioSource.PlayClipAtPoint(shootSFX, playerCameraTransform.position + playerCameraTransform.forward, sfxVolume);
+
+            if (shootSFX)
+                myAudioSource.PlayOneShot(shootSFX, sfxVolume);
         }
     }
 
@@ -69,6 +73,7 @@ public class Weapon_Railgun : Weapon
 
     public override void Initialize()
     {
+        myAudioSource = GetComponent<AudioSource>();
         playerCameraTransform = Camera.main.transform;
     }
 }

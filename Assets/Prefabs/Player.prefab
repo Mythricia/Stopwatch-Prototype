@@ -14,6 +14,9 @@ GameObject:
   - 114: {fileID: 11426890}
   - 114: {fileID: 11499702}
   - 114: {fileID: 11412148}
+  - 82: {fileID: 8234722}
+  - 114: {fileID: 11444798}
+  - 114: {fileID: 11461346}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -59,8 +62,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 196630}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0.000000059604645, z: 0, w: 1}
+  m_LocalPosition: {x: 20, y: 2.5, z: -102.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -108,6 +111,80 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 197812}
   m_Enabled: 1
+--- !u!82 &8234722
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196630}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!92 &9283274
 Behaviour:
   m_ObjectHideFlags: 1
@@ -126,9 +203,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5936c8efb1a522f4e9837c6b96336771, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerWeapons:
-  - {fileID: 11482896, guid: 8b109757eff6d134da25e76d9498c0b4, type: 2}
   weaponIndex: 0
+  weaponIcons:
+  - {fileID: 2800000, guid: cb6892541d06eb94e83f7405faa5fbfa, type: 3}
+  - {fileID: 2800000, guid: 85056160885fe514487111a54338eb8c, type: 3}
   interactRange: 3
 --- !u!114 &11419920
 MonoBehaviour:
@@ -141,8 +219,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: befb9738fcc8028449636ed3a3c00e78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 12
-  sprintSpeed: 12
+  moveSpeed: 15
+  sprintSpeed: 15
   gravity: 39.24
   canJump: 1
   jumpPower: 12
@@ -160,6 +238,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfSamples: 10
+--- !u!114 &11444798
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2f86d9638971fd48967009e7379269b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootSFX: {fileID: 8300000, guid: e0a1900d8e014bc42bd85753a73c18dc, type: 3}
+  sfxVolume: 0.35
+  beamPrefab: {fileID: 173662, guid: daa890da751f97c48bb56f38c93ba78a, type: 2}
+  fireRate: 0.5
+--- !u!114 &11461346
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4df554a7c0a7b6449443ca4b46ceccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 134974, guid: 30ce812d2f85b764aa6125f312ca2700, type: 2}
+  power: 200
+  shootSFX: {fileID: 8300000, guid: 2e5bb393359494640b4d8676468a9e6a, type: 3}
+  sfxVolume: 0.75
+  fireRate: 0.25
 --- !u!114 &11478332
 MonoBehaviour:
   m_ObjectHideFlags: 1

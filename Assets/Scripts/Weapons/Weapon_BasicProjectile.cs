@@ -9,10 +9,12 @@ public class Weapon_BasicProjectile : Weapon
 
     // Reference to AudioClip to play
     public AudioClip shootSFX;
+    private AudioSource myAudioSource;
     public float sfxVolume = 0.75f;
 
     public float fireRate = 0.15f;
     private float lastFired = 0f;
+    public Vector3 projectileOriginOffset = new Vector3(0,-0.2f,0);
 
 
     public override void FireWeapon()
@@ -20,7 +22,7 @@ public class Weapon_BasicProjectile : Weapon
         if (projectile != null && IsReady())
         {
             // Instantiante projectile at the camera + 1 meter forward with camera rotation
-            GameObject newProjectile = Instantiate(projectile, playerCameraTransform.position + playerCameraTransform.forward,
+            GameObject newProjectile = Instantiate(projectile, playerCameraTransform.position + projectileOriginOffset + playerCameraTransform.forward,
                                                    playerCameraTransform.rotation) as GameObject;
 
             newProjectile.GetComponent<Rigidbody>().AddForce(playerCameraTransform.forward * power, ForceMode.VelocityChange);
@@ -29,20 +31,7 @@ public class Weapon_BasicProjectile : Weapon
 
             // play sound effect if set
             if (shootSFX)
-            {
-                if (newProjectile.GetComponent<AudioSource>())
-                { // the projectile has an AudioSource component
-                  // play the sound clip through the AudioSource component on the gameobject.
-                  // note: The audio will travel with the gameobject.
-                    newProjectile.GetComponent<AudioSource>().PlayOneShot(shootSFX, sfxVolume);
-                }
-                else
-                {
-                    // dynamically create a new gameObject with an AudioSource
-                    // this automatically destroys itself once the audio is done
-                    AudioSource.PlayClipAtPoint(shootSFX, newProjectile.transform.position, sfxVolume);
-                }
-            }
+                myAudioSource.PlayOneShot(shootSFX, sfxVolume);
         }
     }
 
@@ -55,6 +44,7 @@ public class Weapon_BasicProjectile : Weapon
 
     public override void Initialize()
     {
+        myAudioSource = GetComponent<AudioSource>();
         playerCameraTransform = Camera.main.transform;
     }
 }
