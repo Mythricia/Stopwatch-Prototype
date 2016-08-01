@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public bool smoothMovement = true;
 
     Vector3 recoveryPosition;
+    Telepad currentPad;
 
     [TooltipAttribute("Default Recovery Position")]
     public Vector3 defaultRecoveryPosition;
@@ -72,14 +73,13 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void setRecoveryPosition(Vector3 pos)
+    public void TelepadSet(Telepad newPad)
     {
-        recoveryPosition = pos;
-    }
+        if (currentPad != null)
+            currentPad.SetCurrent(false);
 
-
-    public Vector3 getRecoveryPosition()
-    {
-        return recoveryPosition;
+        currentPad = newPad;
+        currentPad.SetCurrent(true);
+        recoveryPosition = currentPad.GetPosition();
     }
 }

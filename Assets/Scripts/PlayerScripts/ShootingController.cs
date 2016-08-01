@@ -13,7 +13,7 @@ public class ShootingController : MonoBehaviour
     private Transform playerCameraTransform;
     private RaycastHit hit;
     public float interactRange = 3.0f;
-    private int layerMask = 1 << 8;     // Only interact with objects that are part of the custom "Interactable" Layer.
+    private int layerMask = 1 << 8;     // Layermask to only interact with objects that are part of the custom "Interactable" Layer.
                                         // (0000 0001) << 8 = (1 0000 0000)  -> Only interact with the 8th layer
 
     public void Start()
