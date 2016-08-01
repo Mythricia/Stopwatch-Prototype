@@ -20,3 +20,4 @@
 *.prefab binary
 *.asset binary
 *.meta binary
+*.mat binary
