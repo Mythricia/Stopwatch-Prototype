@@ -7545,6 +7545,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1221319383}
+  - 114: {fileID: 1221319384}
   m_Layer: 0
   m_Name: LevelEnvironment
   m_TagString: Untagged
@@ -7569,6 +7570,17 @@ Transform:
   - {fileID: 627464009}
   m_Father: {fileID: 0}
   m_RootOrder: 7
+--- !u!114 &1221319384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1221319382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd25836486aea0c4184b37073faacdab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1228034856
 Prefab:
   m_ObjectHideFlags: 0
@@ -11732,6 +11744,10 @@ Prefab:
     - target: {fileID: 111698, guid: 388d9b844e333fa44abd946c16a97c91, type: 2}
       propertyPath: m_Name
       value: FloorTile20x1x20 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2335492, guid: 388d9b844e333fa44abd946c16a97c91, type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 388d9b844e333fa44abd946c16a97c91, type: 2}
