@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class RangeGameManager : MonoBehaviour
 {
     // Using a Property, as to ensure a singleton instance of RangeGameManager
     public static RangeGameManager rgm { get; private set; }
-
+    public string LevelLeaderboardAPIKey;
 
     public GameObject player;
     public string playerName;
@@ -151,7 +152,8 @@ public class RangeGameManager : MonoBehaviour
         else
         {
             PlayerPrefs.SetString("playerName", enteredName);
-            Debug.Log("Updated PlayerPrefs to contain playerName: " + PlayerPrefs.GetString("playerName"));
+            playerName = enteredName;
+            Debug.Log("Updated PlayerPrefs to contain playerName: " + playerName);
             HideNameEntryDialogue();
         }
     }
@@ -218,7 +220,15 @@ public class RangeGameManager : MonoBehaviour
     void BeatLevel()
     {
         // beat level successfully
-        string s = "Finished! With " + timeLeft.ToString("0.00") + " seconds left.";
+
+        if ((LevelLeaderboardAPIKey != null) && (playerName != null))
+        {
+            string scoreSubmit = "http://dreamlo.com/lb/" + LevelLeaderboardAPIKey + "/add/" + playerName + "/" + Mathf.RoundToInt(timeLeft * 1000).ToString();
+            UnityWebRequest www = UnityWebRequest.Get(scoreSubmit);
+            www.Send();
+        }
+
+        string s = "Finished! With " + timeLeft.ToString("0.000") + " seconds left.";
         timeLeftDisplay.text = s;
         ShowButtons();
         gameIsOver = true;
