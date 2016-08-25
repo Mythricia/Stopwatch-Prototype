@@ -1,14 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class RangeGameManager : MonoBehaviour
 {
     // Using a Property, as to ensure a singleton instance of RangeGameManager
-    public static RangeGameManager rgm {get; private set;}
-
+    public static RangeGameManager rgm { get; private set; }
+    public string LevelLeaderboardAPIKey;
 
     public GameObject player;
+    public string playerName;
+    private bool doNameEntryDialogue = false;
+    private bool nameDialogueIsShowing = false;
+    public GameObject nameInputField;
 
     public bool gameIsOver = false;
     private bool timerActive = false;
@@ -42,11 +47,23 @@ public class RangeGameManager : MonoBehaviour
     void Awake()
     {
         rgm = this;
+
+        if (PlayerPrefs.HasKey("playerName") == false)
+        {
+            // Do name entry dialogue
+            doNameEntryDialogue = true;
+        }
+        else
+        {
+            playerName = PlayerPrefs.GetString("playerName");
+        }
     }
 
 
     void Start()
     {
+        nameInputField.GetComponent<InputField>().onEndEdit.AddListener(delegate { finishedNameEntry(nameInputField.GetComponent<InputField>().text); });
+
         timeLeft = timeToComplete;
 
         timeLeftDisplay.text = timeLeft.ToString("0.00");
@@ -65,12 +82,19 @@ public class RangeGameManager : MonoBehaviour
 
         if (timerInactiveGfx)
             timerInactiveGfx.SetActive(true);
+
+        if (nameInputField)
+            nameInputField.SetActive(false);
+
+        if (doNameEntryDialogue)
+            ShowNameEntryDialogue();
+
     }
 
 
     void Update()
     {
-        if (levelMenuIsShowing || debugUiIsShowing)
+        if (levelMenuIsShowing || debugUiIsShowing || nameDialogueIsShowing)
             return;
 
         if (!gameIsOver)
@@ -90,6 +114,47 @@ public class RangeGameManager : MonoBehaviour
                 timeLeft -= Time.deltaTime;
                 timeLeftDisplay.text = timeLeft.ToString("0.00");
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.F10))
+        {
+            ShowNameEntryDialogue();
+        }
+    }
+
+
+    void ShowNameEntryDialogue()
+    {
+        nameDialogueIsShowing = true;
+        nameInputField.SetActive(true);
+        player.GetComponent<CharacterController>().enabled = false;
+        nameInputField.GetComponent<InputField>().ActivateInputField();
+        if (PlayerPrefs.HasKey("playerName"))
+            nameInputField.GetComponent<InputField>().text = PlayerPrefs.GetString("playerName");
+    }
+
+    void HideNameEntryDialogue()
+    {
+        nameDialogueIsShowing = false;
+        nameInputField.SetActive(false);
+        player.GetComponent<CharacterController>().enabled = true;
+        nameInputField.GetComponent<InputField>().DeactivateInputField();
+    }
+
+
+    void finishedNameEntry(string enteredName)
+    {
+        if ((enteredName == null) || enteredName == "")
+        {
+            ShowNameEntryDialogue();
+            return;
+        }
+        else
+        {
+            PlayerPrefs.SetString("playerName", enteredName);
+            playerName = enteredName;
+            Debug.Log("Updated PlayerPrefs to contain playerName: " + playerName);
+            HideNameEntryDialogue();
         }
     }
 
@@ -155,7 +220,15 @@ public class RangeGameManager : MonoBehaviour
     void BeatLevel()
     {
         // beat level successfully
-        string s = "Finished! With " + timeLeft.ToString("0.00") + " seconds left.";
+
+        if ((LevelLeaderboardAPIKey != null) && (playerName != null))
+        {
+            string scoreSubmit = "http://dreamlo.com/lb/" + LevelLeaderboardAPIKey + "/add/" + playerName + "/" + Mathf.RoundToInt(timeLeft * 1000).ToString();
+            UnityWebRequest www = UnityWebRequest.Get(scoreSubmit);
+            www.Send();
+        }
+
+        string s = "Finished! With " + timeLeft.ToString("0.000") + " seconds left.";
         timeLeftDisplay.text = s;
         ShowButtons();
         gameIsOver = true;
