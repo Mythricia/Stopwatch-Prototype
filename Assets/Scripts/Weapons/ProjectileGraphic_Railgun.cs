@@ -32,8 +32,9 @@ public class ProjectileGraphic_Railgun : MonoBehaviour
         lr = GetComponent<LineRenderer>();
         creationTime = Time.time;
 
-        lr.SetWidth(beamWidth, beamWidth);
-        lr.SetVertexCount(2);
+        lr.startWidth = beamWidth;
+        lr.endWidth = beamWidth;
+        lr.numPositions = 2;
 
         lr.SetPositions(new Vector3[] { origin, destination });
     }
