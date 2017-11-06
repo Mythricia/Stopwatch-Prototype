@@ -1,6 +1,7 @@
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
+/.vs/
 /Assets/AssetStoreTools*
 
 # Visual Studio Code, Unity plugin
