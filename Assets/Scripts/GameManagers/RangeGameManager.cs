@@ -225,7 +225,7 @@ public class RangeGameManager : MonoBehaviour
         {
             string scoreSubmit = "http://dreamlo.com/lb/" + LevelLeaderboardAPIKey + "/add/" + playerName + "/" + Mathf.RoundToInt(timeLeft * 1000).ToString();
             UnityWebRequest www = UnityWebRequest.Get(scoreSubmit);
-            www.Send();
+            www.SendWebRequest();
         }
 
         string s = "Finished! With " + timeLeft.ToString("0.000") + " seconds left.";
