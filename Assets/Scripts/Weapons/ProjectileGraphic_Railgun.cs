@@ -34,7 +34,7 @@ public class ProjectileGraphic_Railgun : MonoBehaviour
 
         lr.startWidth = beamWidth;
         lr.endWidth = beamWidth;
-        lr.numPositions = 2;
+        lr.positionCount = 2;
 
         lr.SetPositions(new Vector3[] { origin, destination });
     }
